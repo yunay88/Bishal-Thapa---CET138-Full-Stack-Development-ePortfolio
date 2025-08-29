@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bishal's ePortfolio</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <nav>
+      <ul class="nav-list">
+        <h3><a href="index.html">Bishal's ePortfolio</a></h3>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="fullstack.html">Full Stack</a></li>
+        <li><a href="htmlpage.html">HTML</a></li>
+        <li><a href="css.html">CSS</a></li>
+        <li><a href="bootstrap.html" aria-current="page">Bootstrap</a></li>
+        <li><a href="javascript.html">JavaScript</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section>
+      <h2>What is Bootstrap? A Framework for Efficiency</h2>
+      <p>Bootstrap is a leading front-end framework that revolutionizes web development by providing a rich library of prebuilt CSS and JavaScript components, coupled with a highly flexible responsive grid system. Designed to accelerate the creation of modern, mobile-first websites, Bootstrap offers tools like navbars, buttons, modals, and cards, enabling developers to craft consistent and accessible user interfaces with remarkable speed and efficiency.</p>
+    </section>
+
+    <section>
+      <h2>Demo: Bootstrap Components in Action</h2>
+      <h3>1. Responsive Grid System</h3>
+      <div class="row">
+        <div class="col-md-4 p-3 bg-warning text-white">Column 1 - Displays content in a flexible layout</div>
+        <div class="col-md-4 p-3 bg-warning text-white">Column 2 - Adjusts based on screen size</div>
+        <div class="col-md-4 p-3 bg-warning text-white">Column 3 - Stacks on smaller screens</div>
+      </div>
+      <p>Resize the browser window to observe how the columns stack responsively on smaller screens, a hallmark of Bootstrap's grid system.</p>
+
+      <h3>2. Styled Buttons</h3>
+      <button type="button" class="btn btn-primary m-2">Primary Button - Main Action</button>
+      <button type="button" class="btn btn-success m-2">Success Button - Positive Action</button>
+      <button type="button" class="btn btn-danger m-2">Danger Button - Warning Action</button>
+
+      <h3>3. Dynamic Navbar</h3>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark my-3" aria-label="Demo navigation bar">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">DemoSite</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarDemo"
+                  aria-controls="navbarDemo" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarDemo">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
+              <li class="nav-item"><a class="nav-link" href="#">Features</a></li>
+              <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+      <h3>4. Interactive Modal</h3>
+      <button type="button" class="btn btn-primary m-2" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Launch Interactive Modal
+      </button>
+
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Bootstrap Modal Example</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              This modal dialog serves as an interactive popup, demonstrating Bootstrap's capability to create engaging user interfaces for notifications or forms.
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close Modal</button>
+              <button type="button" class="btn btn-primary">Save Changes</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Reflection</h2>
+      <p>This page vividly demonstrates Bootstrap’s core features, including its responsive grid system, styled buttons, dynamic navbar, and interactive modal. The framework’s strengths lie in its speed, consistency, and built-in accessibility features, making it ideal for rapid prototyping. However, a potential limitation is the risk of producing generic-looking sites unless customized extensively, suggesting a need for unique styling in future projects.</p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>© 2025 Bishal Thapa | ePortfolio Project</p>
+  </footer>
+  <script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

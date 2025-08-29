@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bishal's ePortfolio</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <nav>
+      <ul class="nav-list">
+        <h3><a href="index.html">Bishal's ePortfolio</a></h3>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="fullstack.html">Full Stack</a></li>
+        <li><a href="htmlpage.html">HTML</a></li>
+        <li><a href="css.html" aria-current="page">CSS</a></li>
+        <li><a href="bootstrap.html">Bootstrap</a></li>
+        <li><a href="javascript.html">JavaScript</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section>
+      <h2>What is CSS? A Styling Revolution</h2>
+      <p>Cascading Style Sheets (CSS) is a powerful styling language that breathes life into the structural framework provided by HTML. It governs the visual and layout aspects of web pages, including color palettes, typography, spacing, and responsive behavior, ensuring that websites are aesthetically pleasing and adaptable across various devices and screen sizes without altering the underlying HTML structure.</p>
+    </section>
+
+    <section>
+      <h2>Demo: CSS Techniques in Action</h2>
+      <h3>1. Color Customization</h3>
+      <p style="color: #FF5733;">This text is styled in a vibrant coral shade, demonstrating precise color control.</p>
+      <p style="background-color: #3498DB; color: #FFFFFF; padding: 10px;">This paragraph features a soothing blue background with white text, showcasing background color application.</p>
+
+      <h3>2. Font Variations</h3>
+      <p style="font-family: 'Georgia', serif; font-size: 16px;">This text uses the elegant Georgia serif font, ideal for formal content.</p>
+      <p style="font-family: 'Arial', sans-serif; font-size: 16px;">This text employs the clean Arial sans-serif font, perfect for modern designs.</p>
+      <p style="font-family: 'Courier New', monospace; font-size: 16px;">This text utilizes the Courier New monospace font, great for code snippets.</p>
+
+      <h3>3. Box Model Mastery</h3>
+      <div style="padding: 15px; border: 2px solid #26A69A; margin: 10px; width: 200px; text-align: center;">This box exemplifies the CSS box model, with visible padding, a teal border, and external margin, creating a well-defined spacing structure.</div>
+
+      <h3>4. Layout with Flexbox</h3>
+      <div style="display: flex; gap: 10px; justify-content: space-between; width: 100%;">
+        <div style="background: #FF7043; padding: 15px; flex: 1; text-align: center;">Box 1 - Flexible Layout Element</div>
+        <div style="background: #FF7043; padding: 15px; flex: 1; text-align: center;">Box 2 - Flexible Layout Element</div>
+        <div style="background: #FF7043; padding: 15px; flex: 1; text-align: center;">Box 3 - Flexible Layout Element</div>
+      </div>
+
+      <h3>5. Responsive Design with Media Queries</h3>
+      <p id="responsive-text">This text dynamically changes to coral when the browser window is resized below 600px, illustrating responsive design principles.</p>
+    </section>
+
+    <section>
+      <h2>Reflection</h2>
+      <p>This page showcases an array of CSS techniques, including color customization, font styling, the box model, Flexbox layouts, and responsive design using media queries. These examples highlight CSS's transformative power, turning static HTML into visually engaging and adaptable web pages. Future explorations could include CSS Grid and advanced animations for even richer designs.</p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>© 2025 Bishal Thapa | ePortfolio Project</p>
+  </footer>
+  <script>
+    const text = document.getElementById('responsive-text');
+    function updateColor() {
+      text.style.color = window.innerWidth < 600 ? '#FF7043' : '#212121';
+    }
+    updateColor();
+    window.addEventListener('resize', updateColor);
+  </script>
+  <script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script>
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Full Stack Development ePortfolio</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <nav>
+      <ul class="nav-list">
+        <h3><a href="index.html">Bishal's ePortfolio</a></h3>
+        <li><a href="index.html" aria-current="page">Home</a></li>
+        <li><a href="fullstack.html">Full Stack</a></li>
+        <li><a href="htmlpage.html">HTML</a></li>
+        <li><a href="css.html">CSS</a></li>
+        <li><a href="bootstrap.html">Bootstrap</a></li>
+        <li><a href="javascript.html">JavaScript</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section>
+      <h2>Welcome to My ePortfolio</h2>
+      <p>Welcome to my comprehensive ePortfolio, meticulously crafted to showcase my journey and proficiency in Full Stack Web Development as part of the CET138 module. This portfolio is designed to highlight my skills across a spectrum of essential technologies, providing an in-depth exploration of each topic. Each section offers a detailed introduction to the technology, a practical working demonstration hosted on my UOS webspace, and a reflective analysis that discusses strengths, potential limitations, and avenues for future improvement. This project reflects my dedication to mastering the art of building robust, user-friendly web applications.</p>
+    </section>
+
+    <section>
+      <h2>Comprehensive Overview of Topics</h2>
+      <div class="topic-grid">
+        <div class="topic-card">
+          <h3>Full Stack Development</h3>
+          <p>Full stack development is a holistic approach to web creation, encompassing both the front-end—where users interact with visually appealing interfaces built using HTML, CSS, and JavaScript—and the back-end, which manages server operations, database management, and application logic. This section explores how these layers collaborate to deliver seamless digital experiences.</p>
+          <a href="fullstack.html" class="btn">Explore More</a>
+        </div>
+        <div class="topic-card">
+          <h3>HTML</h3>
+          <p>HTML, or HyperText Markup Language, serves as the foundational skeleton of every web page, organizing content into a structured format using elements like headings, paragraphs, links, images, lists, tables, and forms. This section delves into how HTML establishes the groundwork for accessible and SEO-optimized websites.</p>
+          <a href="htmlpage.html" class="btn">Explore More</a>
+        </div>
+        <div class="topic-card">
+          <h3>CSS</h3>
+          <p>Cascading Style Sheets (CSS) is the artistic layer of web development, transforming the structural foundation of HTML into visually stunning and responsive designs. This section covers advanced styling techniques, including color schemes, typography, layout systems like Flexbox, and adaptive design principles.</p>
+          <a href="css.html" class="btn">Explore More</a>
+        </div>
+        <div class="topic-card">
+          <h3>Bootstrap Framework</h3>
+          <p>Bootstrap is a powerful front-end framework that accelerates web development by offering pre-designed, responsive components such as grids, buttons, navbars, and modals. This section demonstrates how Bootstrap streamlines the creation of consistent, mobile-friendly user interfaces with minimal effort.</p>
+          <a href="bootstrap.html" class="btn">Explore More</a>
+        </div>
+        <div class="topic-card">
+          <h3>JavaScript</h3>
+          <p>JavaScript is the dynamic engine behind interactive web experiences, enabling real-time content updates, user input handling, and seamless integration with back-end services via APIs. This section explores its role in creating engaging, functional web applications.</p>
+          <a href="javascript.html" class="btn">Explore More</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>© 2025 Bishal Thapa | CET138 Full Stack Development ePortfolio</p>
+  </footer>
+  <script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script>
+</body>
+</html>

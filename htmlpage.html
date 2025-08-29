@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bishal's ePortfolio</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <nav>
+      <ul class="nav-list">
+        <h3><a href="index.html">Bishal's ePortfolio</a></h3>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="fullstack.html">Full Stack</a></li>
+        <li><a href="htmlpage.html" aria-current="page">HTML</a></li>
+        <li><a href="css.html">CSS</a></li>
+        <li><a href="bootstrap.html">Bootstrap</a></li>
+        <li><a href="javascript.html">JavaScript</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section>
+      <h2>HTML: The Foundation of Web Development</h2>
+      <p>HTML, or HyperText Markup Language, is the cornerstone of web development, 
+        providing a structured framework for creating web pages. 
+        It uses a variety of elements—such as headings, paragraphs, links, images, lists, tables, and forms—to organize content in a way that is both human-readable and machine-processable. By employing semantic tags, HTML enhances accessibility for users with disabilities and improves search engine optimization, making it an indispensable tool for building robust web applications.</p>
+    </section>
+
+    <section>
+      <h2>Headings </h2>
+      <p>Headings establish a hierarchical structure for web content, ranging from <h1> for the main title to <h6> for subtlest subheadings. This organization aids screen readers and search engines in understanding page layout, significantly boosting accessibility and SEO performance.</p>
+      <h1>This is the Primary Heading (H1)</h1>
+      <h2>This is a Secondary Heading (H2)</h2>
+      <h3>This is a Tertiary Heading (H3)</h3>
+    </section>
+
+    <section>
+      <h2>Paragraphs</h2>
+      <p>Paragraphs are essential for presenting blocks of text, allowing developers to convey detailed information or narratives. They are styled and spaced to ensure readability and flow within the page layout.</p>
+      <p>This paragraph serves as an example, containing a detailed description to demonstrate how text can be organized and presented effectively on a web page.</p>
+    </section>
+
+    <section>
+      <h2>Links</h2>
+      <p>Hyperlinks, created with the <a> tag, enable navigation between pages or external resources, enhancing user exploration. The href attribute specifies the destination, making links a fundamental feature for web connectivity.</p>
+      <a href="https://developer.mozilla.org" target="_blank">Visit the MDN Web Docs for Extensive HTML Resources</a>
+    </section>
+
+    <section>
+      <h2>Images </h2>
+      <p>Images enrich web content visually, and the <img> tag with an alt attribute ensures accessibility by providing text descriptions for screen readers, catering to users with visual impairments.</p>
+      <img src="sample1 (1).jpg" style="width: 70vh;" alt="A placeholder image representing a sample visual element">
+    </section>
+
+    <section>
+      <h2>Lists </h2>
+      <p>Lists organize related items, with unordered lists using bullets and ordered lists using numbers, offering flexibility in content presentation for better user comprehension.</p>
+      <ul>
+        <li>Apple - A nutritious fruit rich in vitamins</li>
+        <li>Banana - Known for its potassium content</li>
+        <li>Orange - A citrus fruit high in vitamin C</li>
+      </ul>
+      <ol>
+        <li>First Step - Initial action in a process</li>
+        <li>Second Step - Follow-up action</li>
+        <li>Third Step - Final action</li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>Tables</h2>
+      <p>Tables structure data into rows and columns, using <thead> for headers and <tbody> for content, making complex information easy to digest and visually appealing.</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Role</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Bishal Thapa</td>
+            <td>21</td>
+            <td>Student</td>
+          </tr>
+          <tr>
+            <td>Sita Sharma</td>
+            <td>23</td>
+            <td>Developer</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>Forms</h2>
+      <p>Forms facilitate user input collection with elements like text fields and buttons, requiring labeled inputs for accessibility to ensure all users can interact effectively.</p>
+      <form>
+        <label for="name">Full Name:</label>
+        <input type="text" id="name" name="name" required>
+        <label for="email">Email Address:</label>
+        <input type="email" id="email" name="email" required>
+        <button type="submit">Submit Form</button>
+      </form>
+    </section>
+
+    <section>
+      <h2>Reflection</h2>
+      <p>This page comprehensively demonstrates the core HTML elements that form the building blocks of all websites. By focusing on structure and semantics, HTML lays a solid foundation, which CSS and JavaScript subsequently enhance with design and interactivity. The examples highlight practical applications, paving the way for more advanced web development techniques.</p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>© 2025 Bishal Thapa | CET138 Full Stack Development ePortfolio</p>
+  </footer>
+  <script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script>
+</body>
+</html>

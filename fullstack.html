@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bishal's ePortfolio</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <nav>
+      <ul class="nav-list">
+        <h3><a href="index.html">Bishal's ePortfolio</a></h3>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="fullstack.html" aria-current="page">Full Stack</a></li>
+        <li><a href="htmlpage.html">HTML</a></li>
+        <li><a href="css.html">CSS</a></li>
+        <li><a href="bootstrap.html">Bootstrap</a></li>
+        <li><a href="javascript.html">JavaScript</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section>
+      <h2>What is Full Stack Development?</h2>
+      <p>Full stack development is a comprehensive discipline that involves designing, developing, and maintaining the entirety of a web application. It encompasses the front-end, which includes the user interface and client-side interactions crafted with HTML, CSS, and JavaScript, and the back-end, which handles server-side logic, database management, and application functionality using technologies like Node.js, Python, or PHP. A proficient full stack developer possesses the expertise to integrate these layers seamlessly, ensuring a cohesive and efficient digital solution that meets diverse user needs.</p>
+    </section>
+
+    <section>
+      <h2>Demo: Interactive Task Management Application</h2>
+      <form id="taskForm">
+        <label for="taskInput">Enter a New Task:</label>
+        <input type="text" id="taskInput" placeholder="e.g., Complete assignment" required>
+        <button type="submit">Add Task</button>
+      </form>
+      <ul id="taskList"></ul>
+      <div id="serverLog">
+        <h3>Server Simulation Log:</h3>
+      </div>
+    </section>
+
+    <section>
+      <h2>Reflection</h2>
+      <p>This interactive demo simulates a task management application, illustrating the core principles of full stack development through a front-end form that interfaces with a simulated back-end using localStorage. It supports create, read, update, and delete (CRUD) operations, mimicking real-world workflows. While the strength lies in its simplicity and browser-based functionality, limitations include the absence of real-time server communication, user authentication, and scalability. For future enhancement, integrating a Node.js/Express API with a MongoDB database would provide a more robust and secure solution.</p>
+    </section>
+
+    <section>
+      <h2>Front-End (Client Side)</h2>
+      <p>The front-end represents the visible and interactive portion of a web application, executed within the user's browser. It leverages HTML to structure content, CSS to enhance visual appeal, and JavaScript to introduce dynamic behaviors, creating an engaging user experience that responds to inputs and actions in real time.</p>
+    </section>
+
+    <section>
+      <h2>Back-End (Server Side)</h2>
+      <p>The back-end is the invisible powerhouse of a web application, operating on the server to process requests, execute business logic, manage database interactions, and deliver responses. Technologies such as Node.js with Express, Django with Python, or Java-based frameworks are commonly utilized to ensure efficient and secure data handling.</p>
+    </section>
+
+    <section>
+      <h2>Database Management</h2>
+      <p>Databases are critical for storing, organizing, and retrieving data in web applications. Relational databases like MySQL and PostgreSQL structure data in tables with rows and columns, while NoSQL databases like MongoDB offer flexible, document-based storage, catering to diverse application requirements.</p>
+    </section>
+
+    <section>
+      <h2>How Layers Integrate</h2>
+      <p>The integration of front-end and back-end components forms the backbone of full stack development. For instance, a user submitting a form triggers a request to the back-end, which processes the input, updates the database, and returns a response, completing a cycle that powers interactive web experiences.</p>
+    </section>
+
+    <section>
+      <h2>Beyond Coding: Deployment and Tools</h2>
+      <p>Full stack development extends beyond coding to include deployment strategies, version control with tools like Git, cloud hosting on platforms like AWS or Heroku, and continuous integration practices. These elements ensure that web applications are not only built but also effectively maintained and scaled in production environments.</p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>© 2025 Bishal Thapa | ePortfolio Project</p>
+  </footer>
+  <script src="fullstack-demo.js"></script>
+  <script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script>
+</body>
+</html>

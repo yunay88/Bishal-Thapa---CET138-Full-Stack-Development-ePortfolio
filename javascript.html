@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JavaScript - ePortfolio</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Quicksand:wght@600&display=swap"
+    rel="stylesheet" />
+</head>
+
+<body>
+
+  <header class="site-header">
+    
+    <nav aria-label="Main Navigation">
+      <ul class="nav-list">
+        <h3><a href="index.html">Bishal's ePortfolio</a></h3>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="fullstack.html">Full Stack</a></li>
+        <li><a href="htmlpage.html">HTML</a></li>
+        <li><a href="css.html">CSS</a></li>
+        <li><a href="bootstrap.html">Bootstrap</a></li>
+        <li><a href="javascript.html" aria-current="page">JavaScript</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main" class="container">
+    <section>
+      <h2>JavaScript Overview</h2>
+      <p>
+        JavaScript makes websites dynamic and interactive. It can update content,
+        handle user input, and connect front-end pages to back-end servers.
+      </p>
+    </section>
+
+    <section>
+      <h3>Ways to Use JavaScript</h3>
+      <ul>
+        <li><strong>Inline:</strong> in attributes like <code>onclick</code>.</li>
+        <li><strong>Internal:</strong> inside a <code>&lt;script&gt;</code> tag.</li>
+        <li><strong>External:</strong> in separate <code>.js</code> files.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h3>Common JavaScript Examples</h3>
+
+      <h4>1. Alerts and Console Log</h4>
+      <p>JS can display alerts or log messages to the console.</p>
+      <button onclick="alert('Hello, this is a JavaScript alert!')">Show Alert</button>
+      <script>console.log("This is a console log message");</script>
+
+      <h4>2. Changing Content with DOM</h4>
+      <p>JS can change text inside HTML elements using the DOM.</p>
+      <p id="demo-text">Original text.</p>
+      <button onclick="document.getElementById('demo-text').innerText='Text changed by JavaScript!'">Change
+        Text
+      </button>
+
+      <h4>3. Form Validation</h4>
+      <p>JS can validate form inputs before submission.</p>
+      <form onsubmit="return validateForm()" aria-label="Sample form">
+        <label for="name">Name:</label>
+        <input type="text" id="name" />
+        <br /><br />
+        <button type="submit">Submit</button>
+      </form>
+      <script>
+        function validateForm() {
+          const name = document.getElementById("name").value.trim();
+          if (!name) { alert("Name must be filled out!"); return false; }
+          alert("Form submitted successfully!"); return true;
+        }
+      </script>
+
+      <h4>4. Event Handling</h4>
+      <p>JS responds to user actions like clicks and hovers.</p>
+      <button id="colorBtn">Change Background Color</button>
+      <script>
+        document.getElementById("colorBtn").addEventListener("click", () => {
+          document.body.style.backgroundColor = "lightyellow";
+        });
+      </script>
+    </section>
+
+    <section>
+      <h2>Reflection</h2>
+      <p>
+        Examples show DOM manipulation, events, and simple validation. For larger
+        apps, prefer modules and external files for maintainability.
+      </p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2025 Pawan Pandey | CET138 Full Stack Development ePortfolio</p>
+  </footer>
+</body>
+
+</html>
